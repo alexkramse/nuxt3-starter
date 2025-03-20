@@ -39,6 +39,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "nuxt-security",
+    "dayjs-nuxt",
   ],
 
   css: ["~/assets/css/main.css"],
@@ -78,6 +79,6 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    strict: false,
+    // strict: false,
   },
 });
