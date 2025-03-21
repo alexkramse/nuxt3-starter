@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-01",
+  compatibilityDate: "2025-03-20",
   future: {
     compatibilityVersion: 4,
   },
@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "nuxt-security",
     "dayjs-nuxt",
+    "@nuxtjs/i18n",
   ],
 
   css: ["~/assets/css/main.css"],
@@ -75,7 +76,24 @@ export default defineNuxtConfig({
     locales: ["en"],
     plugins: ["relativeTime", "utc", "timezone"],
     defaultLocale: "en",
-    defaultTimezone: import.meta.env.APP_TIMEZONE,
+    defaultTimezone: import.meta.env.APP_TIMEZONE || "UTC",
+  },
+
+  i18n: {
+    locales: [
+      { code: "en", iso: "en-US", file: "en.json", name: "English" },
+      { code: "uk", iso: "uk-UA", file: "uk-UA.json", name: "Ukrainian" },
+    ],
+    defaultLocale: "en",
+    langDir: "locales/",
+    lazy: true, // Lazy-load translations
+    strategy: "no_prefix", // Options: 'no_prefix', 'prefix', 'prefix_except_default'
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      alwaysRedirect: false,
+      fallbackLocale: "en",
+    },
   },
 
   typescript: {
