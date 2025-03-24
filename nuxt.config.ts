@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import Aura from "@primeuix/themes/aura";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-03-20",
   future: {
@@ -37,13 +39,15 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/image",
-    "@nuxt/ui",
     "nuxt-security",
     "dayjs-nuxt",
     "@nuxtjs/i18n",
+    "@vueuse/nuxt",
+    "@primevue/nuxt-module",
+    "@nuxtjs/tailwindcss",
   ],
 
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/styles.scss"],
 
   app: {
     head: {
@@ -98,5 +102,28 @@ export default defineNuxtConfig({
 
   typescript: {
     // strict: false,
+  },
+  primevue: {
+    options: {
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: ".dark",
+        },
+      },
+    },
+    components: {
+      exclude: ["Form", "FormField"],
+    },
+    directives: {
+      prefix: "",
+      include: "*",
+    },
+  },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   },
 });
