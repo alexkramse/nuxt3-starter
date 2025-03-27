@@ -95,11 +95,12 @@ export const useFormValidation = () => {
     if (error.response?.status === 422 || error.status === 422) {
       const validationErrors = error.response?.data?.errors || error.data?.errors || {};
       setErrors(validationErrors, namespace);
-    } else if (error.message) {
+      // if (error.message) {
       // Handle general errors
-      setErrors({ general: [error.message] }, namespace);
+      // setErrors({ general: [error.message] }, namespace);
+      // }
+      return;
     }
-
     throw error;
   };
 

@@ -1,42 +1,22 @@
 <script setup>
 import { useLayout } from "~/layouts/layout.js";
 import { useColorMode } from "@vueuse/core";
-import { ref } from "vue";
+
+const { data: authData, signOut } = useAuth();
 
 const colorMode = useColorMode();
 const { toggleMenu, isDarkTheme } = useLayout();
 
 const userPopover = ref();
-const members = ref([
-  {
-    name: "Amy Elsner",
-    image: "amyelsner.png",
-    email: "amy@email.com",
-    role: "Owner",
-  },
-  {
-    name: "Bernardo Dominic",
-    image: "bernardodominic.png",
-    email: "bernardo@email.com",
-    role: "Editor",
-  },
-  {
-    name: "Ioni Bowcher",
-    image: "ionibowcher.png",
-    email: "ioni@email.com",
-    role: "Viewer",
-  },
-]);
-
 const toggleUserPopover = (event) => {
   userPopover.value.toggle(event);
 };
 
 const localePopover = ref();
-
 const toggleLocalePopover = (event) => {
   localePopover.value.toggle(event);
 };
+
 const { locale, locales, setLocale } = useI18n();
 const availableLocales = computed(() => {
   return locales.value.filter((i) => i.code !== locale.value);
@@ -110,10 +90,6 @@ const availableLocales = computed(() => {
               <i class="pi pi-inbox"></i>
               <span>Messages</span>
             </button>
-            <button type="button" class="layout-topbar-action">
-              <i class="pi pi-user"></i>
-              <span>Profile</span>
-            </button>
           </div>
         </div>
 
@@ -160,31 +136,22 @@ const availableLocales = computed(() => {
         </div>
       </Popover>
 
-      <Button rounded icon="pi pi-user" severity="info" aria-label="User" @click="toggleUserPopover" />
+      <Button v-if="authData" rounded icon="pi pi-user" severity="info" aria-label="User" @click="toggleUserPopover" />
       <Popover ref="userPopover">
         <div class="flex flex-col gap-4">
-          <div>
-            <span class="font-medium block mb-2">Team Members</span>
-            <ul class="list-none p-0 m-0 flex flex-col">
-              <li
-                v-for="member in members"
-                :key="member.name"
-                class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border"
+          <ul class="list-none p-0 m-0 flex flex-col">
+            <li class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border">
+              <a
+                href="#"
+                @click.stop.prevent="
+                  signOut();
+                  toggleUserPopover();
+                "
               >
-                <img
-                  :src="`https://primefaces.org/cdn/primevue/images/avatar/${member.image}`"
-                  style="width: 32px"
-                  alt=""
-                />
-                <div>
-                  <span class="font-medium">{{ member.name }}</span>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">
-                    {{ member.email }}
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+                Signout
+              </a>
+            </li>
+          </ul>
         </div>
       </Popover>
     </div>
