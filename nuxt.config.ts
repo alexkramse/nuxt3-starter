@@ -11,16 +11,15 @@ export default defineNuxtConfig({
   $development: {
     ssr: true,
     devtools: {
-      enabled: true,
+      enabled: false,
     },
   },
-
   $production: {
     ssr: true,
   },
 
   runtimeConfig: {
-    apiLocal: import.meta.env.API_LOCAL_URL,
+    apiURL: import.meta.env.API_URL || "http://localhost:8000",
     public: {
       apiBase: import.meta.env.APP_URL,
       apiPrefix: "/api/v1",
@@ -45,6 +44,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@primevue/nuxt-module",
     "@nuxtjs/tailwindcss",
+    "@sidebase/nuxt-auth",
   ],
 
   css: ["~/assets/styles.scss"],
@@ -53,25 +53,18 @@ export default defineNuxtConfig({
     head: {
       title: "Home",
       titleTemplate: "%s | Nuxt3 Starter",
-      meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-      ],
+      meta: [{ charset: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
 
   security: {
+    enabled: false,
     headers: {
       crossOriginEmbedderPolicy: "unsafe-none",
       crossOriginOpenerPolicy: "same-origin-allow-popups",
       contentSecurityPolicy: {
-        "img-src": [
-          "'self'",
-          "data:",
-          "https://*",
-          import.meta.env.APP_URL || "http://127.0.0.1:8000",
-        ],
+        "img-src": ["'self'", "data:", "https://*", import.meta.env.APP_URL || "http://127.0.0.1:8000"],
       },
     },
   },
@@ -103,6 +96,7 @@ export default defineNuxtConfig({
   typescript: {
     // strict: false,
   },
+
   primevue: {
     options: {
       theme: {
@@ -113,17 +107,49 @@ export default defineNuxtConfig({
       },
     },
     components: {
-      exclude: ["Form", "FormField"],
+      exclude: [],
     },
     directives: {
       prefix: "",
       include: "*",
     },
   },
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+
+  auth: {
+    // isEnabled: true,
+    // disableServerSideAuth: false,
+    originEnvKey: "NUXT_API_URL",
+    // baseURL: "http://test.com",
+    provider: {
+      type: "local",
+      endpoints: {
+        signIn: { path: "/auth/login", method: "post" },
+        signOut: { path: "/logout", method: "post" },
+        signUp: { path: "/register", method: "post" },
+        getSession: { path: "/me", method: "get" },
+      },
+      token: {
+        signInResponseTokenPointer: "/data/token",
+        type: "Bearer",
+        cookieName: "auth.token",
+        headerName: "Authorization",
+        maxAgeInSeconds: 3 * 30 * 24 * 60 * 60, // 3 months
+        // sameSiteAttribute: "lax",
+        // cookieDomain: "",
+        // secureCookieAttribute: false,
+        // httpOnlyCookieAttribute: true,
+      },
+    },
+    // sessionRefresh: {
+    //   enablePeriodically: true,
+    //   enableOnWindowFocus: true,
+    // },
   },
 });

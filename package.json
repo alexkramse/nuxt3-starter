@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "format": "prettier --write \"{components,pages,plugins,middleware,layouts,composables,assets}/**/*.{js,jsx,ts,tsx,vue,html,css,scss,json,md}\""
   },
   "dependencies": {
@@ -19,13 +19,16 @@
     "@nuxtjs/tailwindcss": "6.13.2",
     "@pinia/nuxt": "^0.10.1",
     "@primeuix/themes": "^1.0.0",
+    "@primevue/forms": "^4.3.2",
+    "@sidebase/nuxt-auth": "0.10.1",
     "@vue/language-server": "^2.2.8",
     "@vueuse/core": "^13.0.0",
     "@vueuse/nuxt": "13.0.0",
     "dayjs": "^1.11.13",
     "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.23.0",
-    "nuxt": "^3.16.1",
+    "next-auth": "^4.21.1",
+    "nuxt": "3.15.4",
     "nuxt-security": "2.2.0",
     "pinia": "^3.0.1",
     "primeicons": "^7.0.0",
@@ -39,6 +42,7 @@
     "@primevue/nuxt-module": "^4.3.2",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-vue": "^10.0.0",
     "prettier": "3.5.3",
     "sass-embedded": "^1.86.0"
   }
