@@ -10,11 +10,7 @@ const model = ref([
 <template>
   <ul class="layout-menu">
     <template v-for="(item, i) in model" :key="item">
-      <LayoutSidebarMenuItem
-        v-if="!item.separator"
-        :item="item"
-        :index="i"
-      ></LayoutSidebarMenuItem>
+      <LayoutSidebarMenuItem v-if="!item.separator" :item="item" :index="i"></LayoutSidebarMenuItem>
       <li v-if="item.separator" class="menu-separator"></li>
     </template>
   </ul>

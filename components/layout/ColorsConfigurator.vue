@@ -422,9 +422,7 @@ const surfaces = ref([
 ]);
 
 function getPresetExt() {
-  const color = primaryColors.value.find(
-    (c) => c.name === layoutConfig.primary,
-  );
+  const color = primaryColors.value.find((c) => c.name === layoutConfig.primary);
 
   if (color.name === "noir") {
     return {
@@ -502,8 +500,7 @@ function getPresetExt() {
             },
             highlight: {
               background: "color-mix(in srgb, {primary.400}, transparent 84%)",
-              focusBackground:
-                "color-mix(in srgb, {primary.400}, transparent 76%)",
+              focusBackground: "color-mix(in srgb, {primary.400}, transparent 76%)",
               color: "rgba(255,255,255,.87)",
               focusColor: "rgba(255,255,255,.87)",
             },
@@ -535,15 +532,9 @@ function applyTheme(type, color) {
 function onPresetChange() {
   layoutConfig.preset = preset.value;
   const presetValue = presets[preset.value];
-  const surfacePalette = surfaces.value.find(
-    (s) => s.name === layoutConfig.surface,
-  )?.palette;
+  const surfacePalette = surfaces.value.find((s) => s.name === layoutConfig.surface)?.palette;
 
-  $t()
-    .preset(presetValue)
-    .preset(getPresetExt())
-    .surfacePalette(surfacePalette)
-    .use({ useDefaultOptions: true });
+  $t().preset(presetValue).preset(getPresetExt()).surfacePalette(surfacePalette).use({ useDefaultOptions: true });
 }
 
 function onMenuModeChange() {
@@ -564,7 +555,6 @@ function onMenuModeChange() {
             :key="primaryColor.name"
             type="button"
             :title="primaryColor.name"
-            @click="updateColors('primary', primaryColor)"
             :class="[
               'border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1',
               { 'outline-primary': layoutConfig.primary === primaryColor.name },
@@ -572,6 +562,7 @@ function onMenuModeChange() {
             :style="{
               backgroundColor: `${primaryColor.name === 'noir' ? 'var(--text-color)' : primaryColor.palette['500']}`,
             }"
+            @click="updateColors('primary', primaryColor)"
           ></button>
         </div>
       </div>
@@ -583,7 +574,6 @@ function onMenuModeChange() {
             :key="surface.name"
             type="button"
             :title="surface.name"
-            @click="updateColors('surface', surface)"
             :class="[
               'border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1',
               {
@@ -595,27 +585,23 @@ function onMenuModeChange() {
               },
             ]"
             :style="{ backgroundColor: `${surface.palette['500']}` }"
+            @click="updateColors('surface', surface)"
           ></button>
         </div>
       </div>
       <div class="flex flex-col gap-2">
         <span class="text-sm text-muted-color font-semibold">Presets</span>
-        <SelectButton
-          v-model="preset"
-          @change="onPresetChange"
-          :options="presetOptions"
-          :allowEmpty="false"
-        />
+        <SelectButton v-model="preset" :options="presetOptions" :allow-empty="false" @change="onPresetChange" />
       </div>
       <div class="flex flex-col gap-2">
         <span class="text-sm text-muted-color font-semibold">Menu Mode</span>
         <SelectButton
           v-model="menuMode"
-          @change="onMenuModeChange"
           :options="menuModeOptions"
-          :allowEmpty="false"
-          optionLabel="label"
-          optionValue="value"
+          :allow-empty="false"
+          option-label="label"
+          option-value="value"
+          @change="onMenuModeChange"
         />
       </div>
     </div>

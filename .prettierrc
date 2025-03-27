@@ -1,0 +1,10 @@
+{
+  "printWidth": 120,
+  "bracketSpacing": true,
+  "trailingComma": "all",
+  "singleQuote": false,
+  "semi": true,
+  "endOfLine": "auto",
+  "vueIndentScriptAndStyle": false,
+  "htmlWhitespaceSensitivity": "ignore"
+}

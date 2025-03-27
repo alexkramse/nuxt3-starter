@@ -46,10 +46,7 @@ const availableLocales = computed(() => {
 <template>
   <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
-      <button
-        class="layout-menu-button layout-topbar-action"
-        @click="toggleMenu"
-      >
+      <button class="layout-menu-button layout-topbar-action" @click="toggleMenu">
         <i class="pi pi-bars"></i>
       </button>
       <NuxtLink to="/" class="layout-topbar-logo">
@@ -127,6 +124,7 @@ const availableLocales = computed(() => {
           aria-label="Theme"
           @click="colorMode = colorMode === 'dark' ? 'light' : 'dark'"
         />
+
         <div class="relative">
           <Button
             v-styleclass="{
@@ -146,13 +144,7 @@ const availableLocales = computed(() => {
         </div>
       </div>
 
-      <Button
-        rounded
-        icon="pi pi-language"
-        variant="text"
-        aria-label="User"
-        @click="toggleLocalePopover"
-      />
+      <Button rounded icon="pi pi-language" variant="text" aria-label="User" @click="toggleLocalePopover" />
       <Popover ref="localePopover">
         <div class="flex flex-col gap-4">
           <ul class="list-none p-0 m-0 flex flex-col">
@@ -168,13 +160,7 @@ const availableLocales = computed(() => {
         </div>
       </Popover>
 
-      <Button
-        rounded
-        icon="pi pi-user"
-        severity="info"
-        aria-label="User"
-        @click="toggleUserPopover"
-      />
+      <Button rounded icon="pi pi-user" severity="info" aria-label="User" @click="toggleUserPopover" />
       <Popover ref="userPopover">
         <div class="flex flex-col gap-4">
           <div>
