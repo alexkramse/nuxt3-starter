@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiURL: import.meta.env.API_URL || "http://localhost:8000",
     public: {
-      apiBase: import.meta.env.APP_URL,
+      apiBase: import.meta.env.API_URL,
       apiPrefix: "/api/v1",
       storageBase: import.meta.env.APP_URL + "/storage/",
       providers: {
