@@ -18,7 +18,7 @@ export default defineNuxtPlugin({
         }
 
         const tag = normalizeUrl(request);
-        const shouldAbort = (options as { shouldAbort?: boolean })?.shouldAbort !== false;
+        const shouldAbort = (options as { shouldAbort?: boolean })?.shouldAbort == true;
         if (shouldAbort) {
           if (controllers[tag]) controllers[tag].abort();
           controllers[tag] = new AbortController();
